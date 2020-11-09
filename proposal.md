@@ -52,6 +52,6 @@ Another risk is to find digestible papers or resources for a contour detection a
 * What is the "CIE 1976 (L*, a*, b*) color space (CIELAB)"?
 
 ## Resources
-* [Edge based image contour detection] (https://www.microsoft.com/en-us/research/wp-content/uploads/2013/01/12-2013-icme-edge.pdf): A paper that proposes an edge-based contour detection algorithm to improve the efficiency while maintaining the accuracy of traditional contour based algorithm.
-*[The Berkeley Segmentation Dataset and Benchmark] (https://www2.eecs.berkeley.edu/Research/Projects/CS/vision/bsds/): Dataset with images and their edge and contour segmentation.
-* [Contour Detection and Image Segmentation] (https://ttic.uchicago.edu/~mmaire/papers/pdf/mmaire_thesis.pdf): This is a more in depth and long thesis on contour detection and image segmentation. We might not utilizes the specific algorithm introduced in this thesis but the context and mathematical terminology introduced are useful.
+* [Edge based image contour detection](https://www.microsoft.com/en-us/research/wp-content/uploads/2013/01/12-2013-icme-edge.pdf): A paper that proposes an edge-based contour detection algorithm to improve the efficiency while maintaining the accuracy of traditional contour based algorithm.
+* [The Berkeley Segmentation Dataset and Benchmark](https://www2.eecs.berkeley.edu/Research/Projects/CS/vision/bsds/): Dataset with images and their edge and contour segmentation.
+* [Contour Detection and Image Segmentation](https://ttic.uchicago.edu/~mmaire/papers/pdf/mmaire_thesis.pdf): This is a more in depth and long thesis on contour detection and image segmentation. We might not utilizes the specific algorithm introduced in this thesis but the context and mathematical terminology introduced are useful.
