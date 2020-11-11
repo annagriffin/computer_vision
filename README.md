@@ -3,7 +3,7 @@ Anna Griffin, Sherrie Shen <br>
 November 11, 2020
 
 ## Introduction
-Computer vision and its applications in the field of robotics is quite extensive. It is not uncommon to find a camera or many on a robot these days. The camera is its lense into the world we experience as they beginning getting more stophicated at processing the visual data. There are many algorithms that are leveraged to address a variety of challenges that come along with computer vision. We chose to look into image processing, specifically contour detection algorithms.
+Computer vision and its applications in the field of robotics is quite extensive. It is not uncommon to find a camera or many on a robot these days. The camera is its lense into the world we experience as they beginning getting more sophisticated at processing the visual data. There are many algorithms that are leveraged to address a variety of challenges that come along with computer vision. We chose to look into image processing, specifically contour detection algorithms.
 
 The goal of our project was to be able to extract a path that a robot could follow based on an image. Using a contour algorithm that we implemented ourselves, first extract a set of points that make up the contour of a given image. Then, we filter them into waypoints that serve as instructions the robot is able to interpret. Finally, we publish this series of points to the robot so that it can follow accordingly.
 
@@ -15,20 +15,14 @@ Contour detection is an integral part of image processing. Contours are defined 
 
 ## Video Demonstrations
 
-
 <table>
     <thead>
-      <!-- <tr>
-        <th>Fish</th>
-        <th>Winnie the Pooh</th>
-        <th>Piglet</th>
-      </tr> -->
       <tr>
         <td><img src="contourBot/images/fish.jpg" alt="drawing" width="200"/></th>
         <td><img src="markdown_images/fish_zoomed.gif" alt="drawing" width="500"/></th>
       </tr>
       <tr>
-         <td style="text-align:center"><img src="contourBot/images/pooh.png" alt="drawing" height="100"/></th>
+         <td style="text-align:center"><img src="contourBot/images/pooh.png" alt="drawing" height="200"/></th>
         <td><img src="markdown_images/pooh_zoomed.gif" alt="drawing" width="500"/></th>
       </tr>
       <tr>
@@ -38,7 +32,9 @@ Contour detection is an integral part of image processing. Contours are defined 
     </thead>
   </table>
 
+  > Additional videos with more detail can be found [here](https://github.com/annagriffin/computer_vision/tree/main/markdown_images)
 
+<br>
 
 
 
@@ -49,17 +45,26 @@ Contour detection is an integral part of image processing. Contours are defined 
 #### Extracting Contour Points
 Given an image that we convert to binary, it is pretty easy to distinguish between object pixels (white) and background pixels (black). We can then scan this image, right to left, up to down and mark the transitions from black to white or white to black. Starting on the right and scanning towards the left, there are three scenarios that can occur. 1) The entire row is made up of background pixes and therefore we do not save any of these points as potential contour pixels. 2) A black (background) transitions to a white (object) pixel. When this sequence occurs, we can deduce that it is a right edge contour point. We mark this point as a contour point along with an indicator of which side it belongs to (more on that in sections below). 3) On the other hand, when a white pixel proceeds a black pixel, we know that we have found another contour point, this time on the left side.
 
-The entire image gets scanned in this way to ensure that all of the pixels on the outer bounds of the object are identified. In our implementation, we created a `ContourPoint()` class which we store the x and y values of a point of interest along with two other important pieces of information about the point. The first, denoted by N, holds the number of contour points in the adjacent row. Depending on whether the point is a left contour point or a right point, the sigh of `N` is also significant. Since we are drawing a contour in a counter clock direction, left contour points will receive a positive value because their neighboring scan line will be below it, and thus will have a greater y value. The right contour points will always be negative. When a right contour point is reached going counter clockwise, the next scan line will be a row above the current, therefore reducing the vertical index. 
+![LR Contour Points](markdown_images/LRPoints.jpg)
+The image is made up of background pixels (black) and object pixels (white). Contour points are marked right or left depending on changes in the pixel values as the image is gets scanned from right to left, top to bottom. 
+
+
+<br>
+The entire image gets scanned in this way to ensure that all of the pixels on the outer bounds of the object are identified. In our implementation, we created a `ContourPoint()` class which we store the x and y values of a point of interest along with two other important pieces of information about the point. The first, denoted by `N`, holds the number of contour points in the adjacent row. Depending on whether the point is a left contour point or a right point, the sigh of `N` is also significant. Since we are drawing a contour in a counter clock direction, left contour points will receive a positive value because their neighboring scan line will be below it, and thus will have a greater y value. The right contour points will always be negative. When a right contour point is reached going counter clockwise, the next scan line will be a row above the current, therefore reducing the vertical index. 
 
 
 The second value contains information about the horizontal movement between the target pixel and the following one. To make sense of the image in this context, each pixel can be looked in comparison to its eight neighbors. Depending on the coloring of the pixels around the target one, we can determine if the boundary of the shape shifts along the x direction between those two points. There are four different scenarios that can occur near a point along with the possibility that there is no horizontal movement at all (this would look like a vertical line). Two of them are right contour point specific and the other two only occur with left contour points. This is an opportunity for efficiency as it reduces the amount cases that we have to check at this step. If the direction in the horizontal direction is positive, the `H` value of that point will be positive, and negative when the horizontal direction is negative. If no horizontal direction is identified, the value gets set to 0 which will become important in the reordering step.
 
+![LR Contour Points](markdown_images/horizontal.jpg)
+Four different cases can occur when analyzing the horizontal movement around a specific point. (a) and (f) are specific to right contour points and (c) and (h) only occur on left contour points. The direction that the arrow points indicates the direction of movement. 
+
+<br>
 
 #### Reordering Contour Points
 All of the contour points are stored in table when the `StorageTable()` class is initialized. The storage class contains many functions that help re arrange all of the contour points so that they are in order if you were to plot and trace them. Before this step, the contour points are still ordered how we scanned them which was right to left, top to bottom. To start, we chose an index to start with. This point doesn't really matter since the contour will be a closed loop in the end. This first point can be added to the list of ordered contour points. Next, we want to look at the N value the the current point. Since the N value is signed, we know which direction in the table we should begin our search. There will always be an even number of points in a given row in our case so the indices of the potential neighbors will only be even values. We can assume that we are skipping over the right contour point or points that may also be in the neighboring row. Since it is possible that there could be multiple contour points in one row, we want to look at all of the points between `i + P.N` and `i + m` with m being the total of neighbors in the adjacent row and both points on either side of i (`i+1` and `i-1`). In the cases where there are multiple neighbors, the one that is closes to the current point is chosen.
 
 These steps are repeated until you have come full circle. The points as they are visited are added to the list of ordered contour points. 
-
+<!-- 
 #### Design Decisions for Implementation
 
 
@@ -95,7 +100,7 @@ These steps are repeated until you have come full circle. The points as they are
 ### Sorting Particles for Updating Robot Pose
 
 
-### Updating Particles
+### Updating Particles -->
 
 
 
