@@ -1,4 +1,4 @@
-# Computer Vision
+# Robot Contour Tracer
 Anna Griffin, Sherrie Shen <br>
 November 11, 2020
 
