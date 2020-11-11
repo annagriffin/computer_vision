@@ -24,16 +24,16 @@ Contour detection is an integral part of image processing. Contours are defined 
         <th>Piglet</th>
       </tr> -->
       <tr>
-        <td><img src="contourBot/images/fish.jpg" alt="drawing" width="150"/></th>
-        <td><img src="markdown_images/fish_zoomed.gif" alt="drawing" width="300"/></th>
+        <td><img src="contourBot/images/fish.jpg" alt="drawing" width="200"/></th>
+        <td><img src="markdown_images/fish_zoomed.gif" alt="drawing" width="500"/></th>
       </tr>
       <tr>
-         <td style="text-align:center"><img src="contourBot/images/pooh.png" alt="drawing" height="150"/></th>
-        <td><img src="markdown_images/pooh_zoomed.gif" alt="drawing" width="300"/></th>
+         <td style="text-align:center"><img src="contourBot/images/pooh.png" alt="drawing" height="100"/></th>
+        <td><img src="markdown_images/pooh_zoomed.gif" alt="drawing" width="500"/></th>
       </tr>
       <tr>
-       <td><img src="contourBot/images/piglet.png" alt="drawing" width="150"/></th>
-       <td><img src="markdown_images/piglet_zoomed.gif" alt="drawing" width="300"/></th>
+       <td><img src="contourBot/images/piglet.png" alt="drawing" width="200"/></th>
+       <td><img src="markdown_images/piglet_zoomed.gif" alt="drawing" width="500"/></th>
       </tr>
     </thead>
   </table>
