@@ -16,7 +16,7 @@ Our MVP is to implement a contour detector on an image where the edges and lines
 
 Our stretch goal is to implement the Canny Edge detector ourselves as well so that we can use more sophisticated images and achieve the full pipeline of image to robot drawing. 
 
-![Diagram](images/diagram.jpg)
+![Diagram](markdown_images/diagram.jpg)
 
 
 ## What are your learning goals for this project?
