@@ -12,7 +12,6 @@ class ContourDetector(object):
         self.img = cv2.imread(img_path)
         self.storage = StorageTable(self.img)
         self.storage.get_LF_points()
-        # print(len(self.storage))
 
         self.m = None
         self.K = None
@@ -101,7 +100,8 @@ class ContourDetector(object):
         while True:
             self.m = self.get_adjacent_scan_line_N(i)
             self.K = self.get_possible_contour_neighbors(i, self.m)
-            self.k = self.filter_contour_candidates(self.storage[i])
+            self.k = self.K[0]
+            # self.k = self.filter_contour_candidates(self.storage[i])
             
             self.points_ordered.append(self.storage[self.k])
             i = self.k
@@ -134,12 +134,3 @@ if __name__ == '__main__':
     det.reorder()
     print(len(det.points_ordered))
    
-
-    
-   
-    # table = StorageTable(image_path)
-    # print(table)
-    # table.get_LF_points()
-    # print(table.contour_points)
-    
-  

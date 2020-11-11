@@ -76,10 +76,10 @@ class StorageTable():
   
   def get_LF_points(self):
 
-    for i, row in enumerate(self.binary):
+    for j, row in enumerate(self.binary):
         points_in_row = []
 
-        for j, pixel in reversed(list(enumerate(row))):
+        for i, pixel in reversed(list(enumerate(row))):
 
             # left contour
             if self.prev == 0 and pixel == 255:
