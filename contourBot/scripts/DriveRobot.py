@@ -22,7 +22,7 @@ class DriveRobot(object):
         # parameters related to waypoints
         self.waypoints = waypoints
         self.reach_first_point = False
-        self.angle_offset = 0.001
+        self.angle_offset = 0.005
         self.distance_offset = 0.1
 
         # current position of robot
@@ -32,7 +32,7 @@ class DriveRobot(object):
         self.cur_pose_yaw = 0
 
         # next waypoint robot tries to go to
-        self.last_waypoint = (0, 0)
+        self.last_waypoint = [0, 0]
         self.waypoint_pose_x = 0
         self.waypoint_pose_y = 0
         self.waypoint_pose_theta = 0
@@ -42,8 +42,8 @@ class DriveRobot(object):
         self.angle_diff = math.inf
         self.distance_to_waypoint = math.inf
         self.velocity = Twist()
-        self.k_linear_vel = 0.5
-        self.k_angular_vel = 0.5
+        self.k_linear_vel = 1.5
+        self.k_angular_vel = 1.5
 
         # enable listening for and broadcasting coordinate transforms
         self.tf_listener = TransformListener()
@@ -156,28 +156,29 @@ class DriveRobot(object):
 
     def run(self):
         r = rospy.Rate(5)
+        rospy.sleep(2)  # need this to let publisher initialized
         while not(rospy.is_shutdown()):
             self.waypoints_marker_pub.publish(self.waypoints_marker)
-            # print("Contour waypoint visualization published")
+            print("Contour waypoint visualization published")
             if not self.finish_trace:
                 self.follow_waypoint()
             r.sleep()
 
 
 if __name__ == '__main__':
-    contour_waypoints = [(3, 3),
-                 (4, 3),
-                 (5, 3),
-                 (6, 4),
-                 # (7, 5),
-                 # (6, 6),
-                 # (5, 7),
-                 # (4, 7),
-                 # (3, 7),
-                 # (2, 6),
-                 # (1, 5),
-                 # (2, 4),
-                 (3, 3)]
+    contour_waypoints = [[3, 3],
+                 [4, 3],
+                 [5, 3],
+                 [6, 4],
+                 # [7, 5],
+                 # [6, 6],
+                 # [5, 7],
+                 # [4, 7],
+                 # [3, 7],
+                 # [2, 6],
+                 # [1, 5],
+                 # [2, 4],
+                 [3, 3]]
     bot = DriveRobot(contour_waypoints)
     bot.run()
 
