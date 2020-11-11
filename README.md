@@ -64,6 +64,51 @@ Four different cases can occur when analyzing the horizontal movement around a s
 All of the contour points are stored in table when the `StorageTable()` class is initialized. The storage class contains many functions that help re arrange all of the contour points so that they are in order if you were to plot and trace them. Before this step, the contour points are still ordered how we scanned them which was right to left, top to bottom. To start, we chose an index to start with. This point doesn't really matter since the contour will be a closed loop in the end. This first point can be added to the list of ordered contour points. Next, we want to look at the N value the the current point. Since the N value is signed, we know which direction in the table we should begin our search. There will always be an even number of points in a given row in our case so the indices of the potential neighbors will only be even values. We can assume that we are skipping over the right contour point or points that may also be in the neighboring row. Since it is possible that there could be multiple contour points in one row, we want to look at all of the points between `i + P.N` and `i + m` with m being the total of neighbors in the adjacent row and both points on either side of i (`i+1` and `i-1`). In the cases where there are multiple neighbors, the one that is closes to the current point is chosen.
 
 These steps are repeated until you have come full circle. The points as they are visited are added to the list of ordered contour points. 
+
+
+#### Algorithm Pseudo Code
+```
+# find all contour points
+for row in image:
+
+  if prev = 0 and current = 255:
+    left contour point found
+    save x, y, N, H vales for the point
+
+  elif prev = 255 and current = 0:
+    right contour point found
+    save x, y, N, H vales for the point
+
+  
+# reordering step  
+i = 1
+while True:
+  # number of contour points in neighboring scan line
+  m = adjacent scan line N value
+  
+  # possible contour neighbors
+  K = i + 1, i - 1 and even values between i + N and i + m
+  
+  # filter candidates by removing points that have unexpected horizontal movement
+  for each in K:
+    change_in_x = compare x values of point and candidates
+
+    remove candidates if change_in_x > 0 and h is positive
+
+    remove candidates if change_in_x < 0 and h is negative
+    
+
+  find the candidates that is closest to the current point at index i 
+  
+  # jump to new index
+  i = k
+
+  #  break out of loop
+  if i == 1:
+    break
+
+```
+
 <!-- 
 #### Design Decisions for Implementation
 
