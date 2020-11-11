@@ -48,7 +48,7 @@ class ContourTracingBot(object):
 
 
 if __name__ == "__main__":
-    img_path = "../images/shape.jpg"
+    img_path = "../images/piglet.png"
     paper_dim = (5, 5)
     trace = ContourTracingBot(img_path, paper_dim, True)
     trace.run()
