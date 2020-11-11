@@ -1,21 +1,10 @@
 #!/usr/bin/env python3
 
-import rospy
-import math
 import numpy as np
-
-from std_msgs.msg import Header, ColorRGBA
-from geometry_msgs.msg import Twist, Pose, PoseStamped, Point
-from visualization_msgs.msg import Marker
-
-from tf import TransformListener
-from tf import TransformBroadcaster
-from helper_functions import TFHelper
-
 import cv2
-from matplotlib import pyplot as plt
 
 from ContourToWaypoints import ContourToWaypoints
+from contourDetector import ContourDetector
 from DriveRobot import DriveRobot
 
 
@@ -32,6 +21,8 @@ class ContourTracingBot(object):
         self.waypoints = []
         if use_opencv:
             self.contour = self.get_contour_from_image_openCV()
+        else:
+            self.contour = self.get_contour_from_image_contourDetector()
 
     def get_contour_from_image_openCV(self):
         ret, thresh = cv2.threshold(self.gray_img, 127, 255, 0)
@@ -40,6 +31,10 @@ class ContourTracingBot(object):
         # cv2.imshow("Raw Image", img)
         # k = cv2.waitKey(0)
         return np.squeeze(contours[1]).tolist()
+
+    def get_contour_from_image_contourDetector(self):
+        detector = ContourDetector(self.image_path)
+        return detector.get_contour()
 
     def run(self):
         converter = ContourToWaypoints(self.contour, self.img_size, self.paper_size)
@@ -53,7 +48,7 @@ class ContourTracingBot(object):
 
 
 if __name__ == "__main__":
-    img_path = "../../images/shape.jpg"
+    img_path = "../images/shape.jpg"
     paper_dim = (5, 5)
     trace = ContourTracingBot(img_path, paper_dim, True)
     trace.run()
