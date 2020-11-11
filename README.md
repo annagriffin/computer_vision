@@ -13,6 +13,31 @@ The goal of our project was to be able to extract a path that a robot could foll
 Contour detection is an integral part of image processing. Contours are defined by a continuous curve around an object of the same color/intensity. Facial recognition as well as object and shape detection have foundations rooted in contour detection. Typically threshing and/or edge detection is applied to the image and converted to binary. This makes it easy to distinguish between pixels that make up the object and ones that are part of the background. Due to the stark difference between white pixels and black pixels, we are able to more easily identify the points at which the object and the background meet which is what we are interested in for the contour. While scanning the image, we can keep track of these changes in pixel color to identify an estimate of the perimeter of the shape embedded in our image.  
 
 
+## Video Demonstrations
+
+
+<table>
+    <thead>
+      <tr>
+        <th>Fish</th>
+        <th>Winnie the Pooh</th>
+        <th>Piglet</th>
+      </tr>
+      <tr>
+        <td><img src="contourBot/images/fish.jpg" alt="drawing" width="200"/></th>
+        <td><img src="contourBot/images/pooh.png" alt="drawing" height="100"/></th>
+         <td><img src="contourBot/images/piglet.png" alt="drawing" width="200"/></th>
+      </tr>
+      <tr>
+        <td><img src="markdown_images/fish_zoomed.gif" alt="drawing" width="200"/></th>
+        <td><img src="markdown_images/pooh_zoomed.gif" alt="drawing" width="200"/></th>
+         <td><img src="markdown_images/piglet_zoomed.gif" alt="drawing" width="200"/></th>
+      </tr>
+    </thead>
+  </table>
+
+
+
 
 
 ## Implementation
