@@ -162,7 +162,10 @@ class DriveRobot(object):
             print("Contour waypoint visualization published")
             if not self.finish_trace:
                 self.follow_waypoint()
+            else:
+                break
             r.sleep()
+        print("FINISH! :)")
 
 
 if __name__ == '__main__':
