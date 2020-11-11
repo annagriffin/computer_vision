@@ -2,6 +2,7 @@
 
 import numpy as np
 import cv2
+from matplotlib import pyplot as plt
 
 from ContourToWaypoints import ContourToWaypoints
 from contourDetector import ContourDetector
@@ -33,6 +34,8 @@ class ContourTracingBot(object):
         return np.squeeze(contours[1]).tolist()
 
     def get_contour_from_image_contourDetector(self):
+        plt.imshow(self.raw_image)
+        plt.show()
         detector = ContourDetector(self.image_path)
         return detector.get_contour()
 
