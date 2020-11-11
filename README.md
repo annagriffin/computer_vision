@@ -25,7 +25,7 @@ Contour detection is an integral part of image processing. Contours are defined 
       </tr>
       <tr>
         <td><img src="contourBot/images/fish.jpg" alt="drawing" width="200"/></th>
-        <td><img src="contourBot/images/pooh.png" alt="drawing" height="100"/></th>
+        <td style="text-align:center"><img src="contourBot/images/pooh.png" alt="drawing" height="100"/></th>
          <td><img src="contourBot/images/piglet.png" alt="drawing" width="200"/></th>
       </tr>
       <tr>
