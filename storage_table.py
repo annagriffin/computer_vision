@@ -98,7 +98,7 @@ class StorageTable():
 
             self.prev = pixel
 
-        total_points = len(points_in_row)
+        total_points = len(points_in_row)    # if length is odd, should be even
         for point in points_in_row:
             point.N = point.N * total_points
 
