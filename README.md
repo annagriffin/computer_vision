@@ -183,3 +183,11 @@ To test parts of the algorithm, we used a very small 10 by 6 grid as mock image 
 ## Takeaways
 Since this project had significantly less scaffolding that the previous ones, it was very apparent to us that the more planning that occurs ahead of time, the better of you'll be along the rest of the way (and maybe save yourself from a few grey hairs). Having the freedom to choose our focus for the project made it particularly exciting since we were able to use what we have learned thus far in the course to discover a particular area of computer vision and robotics. Due to the privilege
  of being able to outline our own project, there was a considerable amount of additional design work that had to be thought through at the beginning of the project. While this is a realistic tradeoff, this was a new experience for both of us compared to the previous projects which took a little bit of adjusting. Looking back, planning earlier rather than later seems like a valuable lesson that we can take away from this project.
+
+
+## Resources
+[AN EFFICIENT ALGORITHM FOR THE EXTRACTION OF CONTOURS AND CURVATURE SCALE SPACE ON SIMD-POWERED SMART CAMERAS](https://engineering.purdue.edu/RVL/Publications/Shin08Efficient.pdf)
+
+[OpenCV findContours() implementation](https://github.com/opencv/opencv/blob/master/modules/imgproc/src/contours.cpp#L1885)
+
+[Suzuki’s Contour tracing algorithm OpenCV-Python](https://theailearner.com/2019/11/19/suzukis-contour-tracing-algorithm-opencv-python/)
