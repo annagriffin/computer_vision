@@ -54,10 +54,6 @@ Left: Original image of Piglet. Right: Zoomed in and speeded up video on the Nea
 
 ## Implementation
 
-### System Architecture Diagram
-
-TBD COMING SOON :)
-
 ### Contour Detection Algorithm
 
 #### Motivation
